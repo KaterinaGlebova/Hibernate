@@ -1,5 +1,6 @@
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -12,7 +13,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
     }
 
-
     @Override
     public Employee getById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employee.class, id);
@@ -20,7 +20,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public List<Employee> readAll() {
-        List<Employee> employees = (List<Employee>) HibernateSessionFactoryUtil
+        List<Employee> employees = HibernateSessionFactoryUtil
                 .getSessionFactory().openSession().createQuery("From Employee", Employee.class).list();
         return employees;
     }
@@ -35,7 +35,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void deleteEmployee (Employee employee){
+    public void deleteEmployee(Employee employee) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.delete(employee);

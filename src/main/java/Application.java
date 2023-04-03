@@ -25,5 +25,18 @@ public class Application {
             System.out.println(employee);
         }
 
+
+        CityDAO cityDAO = new CityDAOImpl();
+
+        City vladivostok = new City("Vladivostok");
+        cityDAO.add(vladivostok);
+
+        List<City> cityList = cityDAO.readAll();
+        for (City city: cityList) {
+            System.out.println(city);
+        }
+        cityDAO.getById(1);
+        City habarovsk = new City(vladivostok.getCity_id(), "Habarovsk");
+        cityDAO.updateCity(habarovsk);
     }
 }
